@@ -6,7 +6,7 @@ let cars:Car[];
 function createCar(plate:HTMLInputElement,brand:HTMLInputElement,color:HTMLInputElement){
 
     let car = new Car(plate.value, brand.value, color.value);
-
+    let cars:Car[];
     let plateForm: any = document.getElementById("plate");
     let brandForm: any = document.getElementById("brand");
     let colorForm: any = document.getElementById("color");
@@ -15,6 +15,7 @@ function createCar(plate:HTMLInputElement,brand:HTMLInputElement,color:HTMLInput
     let acumErrors:number = 0;
 
     let formUno:any = document.getElementById('formUno');
+    let formDos:any = document.getElementById('formDos');
 
     formUno.classList.remove('is-invalid');
 
@@ -45,8 +46,10 @@ function createCar(plate:HTMLInputElement,brand:HTMLInputElement,color:HTMLInput
     if (acumErrors > 0){
         return false;
     }else{
-        cambiaPantalla();
         console.log(car);
+        formUno.classList.add("d-none");
+        formDos.classList.remove("d-none");
+        formDos.classList.add("d-flex");
         return true;
     }   
        
@@ -68,9 +71,6 @@ function crearRuedas (brand1: HTMLInputElement, diameter1: HTMLInputElement, bra
     let wheel2 = new Wheel (Number(diameter2.value), brand2.value);
     let wheel3 = new Wheel (Number(diameter3.value), brand3.value);
     let wheel4 = new Wheel (Number(diameter4.value), brand4.value);
-    
-
-    let formDos:any = document.getElementById('formDos');
     
 
     let acumErrors:number = 0;
@@ -132,24 +132,33 @@ function crearRuedas (brand1: HTMLInputElement, diameter1: HTMLInputElement, bra
         acumErrors ++;
     }
 
-    car.addWheel(wheel1);
-    car.addWheel(wheel2);
-    car.addWheel(wheel3);
-    car.addWheel(wheel4);
-
-    let divInfo:any = document.getElementById("divInfo");
-    let carInfo:any = document.createElement("p");
-    divInfo.appendChild(carInfo);
-
-    carInfo.innerText="CAR \nPLATE: " + car.plate
-    + "\nCOLOR: " + car.color + "\nBRAND: " + car.brand
-    + "\nWHEELS: " + JSON.stringify(car.wheels);
 
     
     if (acumErrors > 0){
         return false;
     }else{
+        let wheels: Wheel[];
+        console.log(wheel1);
+        // car.addWheel(wheel1);
+        console.log(wheel2);
+        // car.addWheel(wheel2);
+        console.log(wheel3);
+        // car.addWheel(wheel3);
+        console.log(wheel4);
+        // car.addWheel(wheel4);
+        
+        //RECTIFICAR, RECORRER ARRAY Y MOSTRAR CARS[car] EN LUGAR DEL OBJETO CAR
+
+        let divInfo:any = document.getElementById("divInfo");
+        let carInfo:any = document.createElement("p");
+        divInfo.appendChild(carInfo);
+
+        carInfo.innerText="CAR \nPLATE: " + car.plate
+        + "\nCOLOR: " + car.color + "\nBRAND: " + car.brand
+        + "\nWHEELS: " + JSON.stringify(car.wheels);
         return true;
+
+        
     }      
 }
 
@@ -161,16 +170,9 @@ function valida_plate(plate:string) {
 
 //valida parámetros diámetro
 function valida_diameter(diameter: number){
-    if(diameter > 2 || diameter < 0.4){
-        return false;
+    if(diameter <= 2 && diameter >= 0.4){
+        return true;
     }
 }
 
-//cambia de formulario
-function cambiaPantalla(){
-    let formUno:any = document.getElementById('formUno');
-    formUno.classList.add("d-none");
-    let formDos:any = document.getElementById('formDos');
-    formDos.classList.add("d-flex");
-}
 
