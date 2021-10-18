@@ -1,16 +1,14 @@
 
 let car:Car;
 let cars:Car[];
+let wheels: Wheel[];
 
-     
-function createCar(plate:HTMLInputElement,brand:HTMLInputElement,color:HTMLInputElement){
+function cambiaPantalla(){
 
-    let car = new Car(plate.value, brand.value, color.value);
-    let cars:Car[];
+
     let plateForm: any = document.getElementById("plate");
     let brandForm: any = document.getElementById("brand");
-    let colorForm: any = document.getElementById("color");
-    
+    let colorForm: any = document.getElementById("color"); 
 
     let acumErrors:number = 0;
 
@@ -19,24 +17,24 @@ function createCar(plate:HTMLInputElement,brand:HTMLInputElement,color:HTMLInput
 
     formUno.classList.remove('is-invalid');
 
-    if(plate.value == "") {
+    if(plateForm.value == "") {
 		plateForm.classList.add("is-invalid");
 		document.getElementById("errorPlate").textContent= "Este campo es obligatorio";
         acumErrors ++;
     }
-    else if(!valida_plate(plate.value)){
+    else if(!valida_plate(plateForm.value)){
 		plateForm.classList.add("is-invalid");
 		document.getElementById("errorPlate").textContent = "La placa debe contener 4 números y 3 letras mayúsculas";
 		acumErrors ++;
 	}
 
-    if(brand.value == "") {
+    if(brandForm.value == "") {
 		brandForm.classList.add("is-invalid");
 		document.getElementById("errorBrand").textContent = "Este campo es obligatorio";
         acumErrors ++;
     }
 
-    if(color.value == "") {
+    if(colorForm.value == "") {
         colorForm.classList.add("is-invalid");
         document.getElementById("errorColor").textContent = "Este campo es obligatorio";
         acumErrors ++;
@@ -45,8 +43,7 @@ function createCar(plate:HTMLInputElement,brand:HTMLInputElement,color:HTMLInput
 
     if (acumErrors > 0){
         return false;
-    }else{
-        console.log(car);
+    }else{  
         formUno.classList.add("d-none");
         formDos.classList.remove("d-none");
         formDos.classList.add("d-flex");
@@ -56,9 +53,10 @@ function createCar(plate:HTMLInputElement,brand:HTMLInputElement,color:HTMLInput
 }
 
 
-function crearRuedas (brand1: HTMLInputElement, diameter1: HTMLInputElement, brand2: HTMLInputElement, diameter2: HTMLInputElement, brand3: HTMLInputElement, diameter3: HTMLInputElement, brand4: HTMLInputElement, diameter4: HTMLInputElement ) {
+function crearRuedas (plate: HTMLInputElement, brand: HTMLInputElement, color: HTMLInputElement, brand1: HTMLInputElement, diameter1: HTMLInputElement, brand2: HTMLInputElement, diameter2: HTMLInputElement, brand3: HTMLInputElement, diameter3: HTMLInputElement, brand4: HTMLInputElement, diameter4: HTMLInputElement ) {
 
-    let car: Car;
+    let car = new Car(plate.value, brand.value, color.value);
+    let cars: Car[];
     let brand1Form = document.getElementById("brand1");
     let brand2Form = document.getElementById("brand2");
     let brand3Form = document.getElementById("brand3");
@@ -137,30 +135,41 @@ function crearRuedas (brand1: HTMLInputElement, diameter1: HTMLInputElement, bra
     if (acumErrors > 0){
         return false;
     }else{
-        let wheels: Wheel[];
-        console.log(wheel1);
-        // car.addWheel(wheel1);
-        console.log(wheel2);
-        // car.addWheel(wheel2);
-        console.log(wheel3);
-        // car.addWheel(wheel3);
-        console.log(wheel4);
-        // car.addWheel(wheel4);
+        car.addWheel(wheel1);
+        car.addWheel(wheel2);
+        car.addWheel(wheel3);
+        car.addWheel(wheel4);
         
-        //RECTIFICAR, RECORRER ARRAY Y MOSTRAR CARS[car] EN LUGAR DEL OBJETO CAR
+        console.log(car);
 
         let divInfo:any = document.getElementById("divInfo");
+        let divWheelInfo = document.getElementById("divWheelInfo");
         let carInfo:any = document.createElement("p");
+        let wheelInfo:any = document.createElement("p");
         divInfo.appendChild(carInfo);
+        divWheelInfo.appendChild(wheelInfo);
+        
 
-        carInfo.innerText="CAR \nPLATE: " + car.plate
-        + "\nCOLOR: " + car.color + "\nBRAND: " + car.brand
-        + "\nWHEELS: " + JSON.stringify(car.wheels);
+        carInfo.innerText="CAR \nPlate: " + car.plate
+        + " Color: " + car.color + " Brand: " + car.brand +
+        "\nWHEELS " + "\nWheel 1: " + " Diameter: " + car.wheels[0].diameter +
+        " Brand: " + car.wheels[0].brand +
+        "\nWheel 2: " + " Diameter: " + car.wheels[1].diameter +
+        " Brand: " + car.wheels[1].brand +
+        "\nWheel 3: " + " Diameter: " + car.wheels[2].diameter +
+        " Brand: " + car.wheels[2].brand +
+        "\nWheel 4: " + " Diameter: " + car.wheels[3].diameter +
+        " Brand: " + car.wheels[3].brand;
+
+        cars.push(car);
+        console.log(cars);
+         
         return true;
 
         
     }      
 }
+
 
 //valida formato matrícula
 function valida_plate(plate:string) {

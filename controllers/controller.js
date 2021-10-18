@@ -1,8 +1,7 @@
 var car;
 var cars;
-function createCar(plate, brand, color) {
-    var car = new Car(plate.value, brand.value, color.value);
-    var cars;
+var wheels;
+function cambiaPantalla() {
     var plateForm = document.getElementById("plate");
     var brandForm = document.getElementById("brand");
     var colorForm = document.getElementById("color");
@@ -10,22 +9,22 @@ function createCar(plate, brand, color) {
     var formUno = document.getElementById('formUno');
     var formDos = document.getElementById('formDos');
     formUno.classList.remove('is-invalid');
-    if (plate.value == "") {
+    if (plateForm.value == "") {
         plateForm.classList.add("is-invalid");
         document.getElementById("errorPlate").textContent = "Este campo es obligatorio";
         acumErrors++;
     }
-    else if (!valida_plate(plate.value)) {
+    else if (!valida_plate(plateForm.value)) {
         plateForm.classList.add("is-invalid");
         document.getElementById("errorPlate").textContent = "La placa debe contener 4 números y 3 letras mayúsculas";
         acumErrors++;
     }
-    if (brand.value == "") {
+    if (brandForm.value == "") {
         brandForm.classList.add("is-invalid");
         document.getElementById("errorBrand").textContent = "Este campo es obligatorio";
         acumErrors++;
     }
-    if (color.value == "") {
+    if (colorForm.value == "") {
         colorForm.classList.add("is-invalid");
         document.getElementById("errorColor").textContent = "Este campo es obligatorio";
         acumErrors++;
@@ -34,15 +33,15 @@ function createCar(plate, brand, color) {
         return false;
     }
     else {
-        console.log(car);
         formUno.classList.add("d-none");
         formDos.classList.remove("d-none");
         formDos.classList.add("d-flex");
         return true;
     }
 }
-function crearRuedas(brand1, diameter1, brand2, diameter2, brand3, diameter3, brand4, diameter4) {
-    var car;
+function crearRuedas(plate, brand, color, brand1, diameter1, brand2, diameter2, brand3, diameter3, brand4, diameter4) {
+    var car = new Car(plate.value, brand.value, color.value);
+    var cars;
     var brand1Form = document.getElementById("brand1");
     var brand2Form = document.getElementById("brand2");
     var brand3Form = document.getElementById("brand3");
@@ -120,22 +119,29 @@ function crearRuedas(brand1, diameter1, brand2, diameter2, brand3, diameter3, br
         return false;
     }
     else {
-        var wheels = void 0;
-        console.log(wheel1);
-        // car.addWheel(wheel1);
-        console.log(wheel2);
-        // car.addWheel(wheel2);
-        console.log(wheel3);
-        // car.addWheel(wheel3);
-        console.log(wheel4);
-        // car.addWheel(wheel4);
-        //RECTIFICAR, RECORRER ARRAY Y MOSTRAR CARS[car] EN LUGAR DEL OBJETO CAR
+        car.addWheel(wheel1);
+        car.addWheel(wheel2);
+        car.addWheel(wheel3);
+        car.addWheel(wheel4);
+        console.log(car);
         var divInfo = document.getElementById("divInfo");
+        var divWheelInfo = document.getElementById("divWheelInfo");
         var carInfo = document.createElement("p");
+        var wheelInfo = document.createElement("p");
         divInfo.appendChild(carInfo);
-        carInfo.innerText = "CAR \nPLATE: " + car.plate
-            + "\nCOLOR: " + car.color + "\nBRAND: " + car.brand
-            + "\nWHEELS: " + JSON.stringify(car.wheels);
+        divWheelInfo.appendChild(wheelInfo);
+        carInfo.innerText = "CAR \nPlate: " + car.plate
+            + " Color: " + car.color + " Brand: " + car.brand +
+            "\nWHEELS " + "\nWheel 1: " + " Diameter: " + car.wheels[0].diameter +
+            " Brand: " + car.wheels[0].brand +
+            "\nWheel 2: " + " Diameter: " + car.wheels[1].diameter +
+            " Brand: " + car.wheels[1].brand +
+            "\nWheel 3: " + " Diameter: " + car.wheels[2].diameter +
+            " Brand: " + car.wheels[2].brand +
+            "\nWheel 4: " + " Diameter: " + car.wheels[3].diameter +
+            " Brand: " + car.wheels[3].brand;
+        cars.push(car);
+        console.log(cars);
         return true;
     }
 }

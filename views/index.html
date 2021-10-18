@@ -8,30 +8,31 @@
 </head>
 <body>
     <h1 class="mt-5 mb-5 text-center text-success">Exercici vehícles</h1>
-    <form id="formUno" class="container d-flex flex-column align-items-center">
-        <div class="col-6 d-flex">
-            <div class="m-3">
-                <label for="plate" class="form-label text-success fw-bold">Plate</label>
-                <input type="text" class="form-control" id="plate" name="plate" >
-                <div class="invalid-feedback" id="errorPlate"></div>
+    <form>
+        <div id="formUno" class="container d-flex flex-column align-items-center">
+            <div class="col-6 d-flex">
+                <div class="m-3">
+                    <label for="plate" class="form-label text-success fw-bold">Plate</label>
+                    <input type="text" class="form-control" id="plate" name="plate" >
+                    <div class="invalid-feedback" id="errorPlate"></div>
+                </div>
+                <div class="m-3">
+                    <label for="brand" class="form-label text-success fw-bold">Brand</label>
+                    <input type="text" class="form-control" id="brand" name="brand" ></input>
+                    <div class="invalid-feedback" id="errorBrand"></div>
+                </div>
+                <div class="m-3">
+                    <label for="color" class="form-label text-success fw-bold">Color</label>
+                    <input type="text" class="form-control" id="color" name="color" ></input>
+                    <div class="invalid-feedback" id="errorColor"></div>
+                </div>
             </div>
-            <div class="m-3">
-                <label for="brand" class="form-label text-success fw-bold">Brand</label>
-                <input type="text" class="form-control" id="brand" name="brand" ></input>
-                <div class="invalid-feedback" id="errorBrand"></div>
-            </div>
-            <div class="m-3">
-                <label for="color" class="form-label text-success fw-bold">Color</label>
-                <input type="text" class="form-control" id="color" name="color" ></input>
-                <div class="invalid-feedback" id="errorColor"></div>
+                <div>
+                    <button id="btn_create" type="button" class="btn btn-success" onclick="cambiaPantalla()">Crear coche</button>
+                </div>
             </div>
         </div>
-            <div>
-                <button id="btn_create" type="button" class="btn btn-success" onclick="createCar(plate, brand, color)"">Crear coche</button>
-            </div>
-        </div>
-    </form>
-    <form id="formDos" class="container flex-column align-items-center d-none">
+    <div id="formDos" class="container flex-column align-items-center d-none">
         <div class="col-9 d-flex">
             <div class="m-3">
                 <label for="brand1" class="form-label text-success fw-bold">Marca rueda 1</label>
@@ -77,12 +78,14 @@
             </div>
         </div>
             <div class="d-flex justify-content-center">
-                <button id="btn_create" type="button" class="btn btn-success" onclick="crearRuedas(brand1, diameter1, brand2, diameter2, brand3, diameter3, brand4, diameter4)" >Añadir ruedas</button>
+                <button id="btn_create" type="button" class="btn btn-success" onclick="crearRuedas(plate, brand, color, brand1, diameter1, brand2, diameter2, brand3, diameter3, brand4, diameter4)" >Añadir ruedas</button>
             </div>
         </div>
+    </div>
     </form>
     <div id="divInfo" class="container mt-5 d-flex align-items-center d-flex flex-column">
-       
+    </div>
+    <div id="divWheelInfo" class="container mt-5 d-flex align-items-center d-flex flex-column">
     </div>
     
   
